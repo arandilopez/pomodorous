@@ -19,10 +19,8 @@ export default {
 
 <style scoped>
 #main-page #container {
-  margin-top: 40px;
+  margin-top: 20px;
   display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
   align-items: center;
