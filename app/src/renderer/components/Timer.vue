@@ -25,8 +25,6 @@
         <button type="button" class="button is-primary" @click="playOrPause">
           <i :class="playOrPauseIcon"></i>
         </button>
-      </div>
-      <div class="column">
         <button type="button" class="button is-danger">
           <i class="fa fa-stop"></i>
         </button>
