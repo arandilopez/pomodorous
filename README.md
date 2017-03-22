@@ -31,4 +31,8 @@ Mmm... I'd to link it with Trello, Gitlab and/or Github. Maybe an self hosted To
 
 Well... let's say it's MIT
 
+## Info
+
+Thanks to [wyzant-dev](https://github.com/wyzant-dev) for **vue-radial-progress**
+
 This project was generated from [electron-vue](https://github.com/SimulatedGREG/electron-vue) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about this project can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
