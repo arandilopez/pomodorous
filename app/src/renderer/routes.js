@@ -2,7 +2,12 @@ export default [
   {
     path: '/',
     name: 'main-page',
-    component: require('components/MainPage')
+    component: require('Pages/MainPage')
+  },
+  {
+    path: '/settings',
+    name: 'settings-page',
+    component: require('Pages/SettingsPage')
   },
   {
     path: '*',
