@@ -4,6 +4,8 @@
   "description": "Pomodore time tracker",
   "main": "./dist/main.js",
   "dependencies": {
+    "bulma": "^0.4.0",
+    "font-awesome": "^4.7.0",
     "vue": "^2.1.10",
     "vue-electron": "^1.0.6",
     "vue-router": "^2.1.2",
