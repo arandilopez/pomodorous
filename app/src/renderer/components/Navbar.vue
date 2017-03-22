@@ -1,12 +1,6 @@
 <template lang="html">
-  <nav class="nav has-shadow">
-    <div class="nav-left">
-      <a class="nav-item">
-        Pomodorous
-      </a>
-    </div>
-
-    <div class="nav-center">
+  <nav class="nav">
+    <div class="nav-right">
       <a class="nav-item">
         <span class="icon">
           <i class="fa fa-sliders"></i>
