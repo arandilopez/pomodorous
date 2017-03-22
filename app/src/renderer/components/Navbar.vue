@@ -26,12 +26,4 @@ export default {
 
 <style lang="scss">
 
-nav, .titlebar {
-  -webkit-user-select: none;
-  -webkit-app-region: drag;
-
-  a, button {
-    -webkit-app-region: no-drag;
-  }
-}
 </style>

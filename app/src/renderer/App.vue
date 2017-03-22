@@ -27,5 +27,13 @@ $pink: #ffb3b3; // Add pink
 
 @import "~bulma";
 
+.nav, .titlebar {
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+
+  a, button {
+    -webkit-app-region: no-drag;
+  }
+}
 
 </style>
