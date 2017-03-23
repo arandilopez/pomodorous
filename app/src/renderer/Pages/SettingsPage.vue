@@ -15,7 +15,7 @@
             <div class="field">
               <label class="label">Cycle time: {{cycleTime}} mins</label>
               <p class="control">
-                <slider type="success" size="large" :value="cycleTime" :max="60" :min="20" :step="5" @change="updateCycle" class="input"></slider>
+                <slider type="success" size="large" :value="form.cycleTime" :max="60" :min="20" :step="5" @change="updateCycle" class="input"></slider>
               </p>
             </div>
           </div>
@@ -23,7 +23,7 @@
             <div class="field">
               <label class="label">Short brake time: {{shortBrakeTime}} mins</label>
               <p class="control">
-                <slider type="success" size="large" :value="shortBrakeTime" :max="15" :min="1" :step="1" @change="updateShort" class="input"></slider>
+                <slider type="success" size="large" :value="form.shortBrakeTime" :max="15" :min="1" :step="1" @change="updateShort" class="input"></slider>
               </p>
             </div>
           </div>
@@ -33,7 +33,7 @@
             <div class="field">
               <label class="label">Long brake time: {{longBrakeTime}} mins</label>
               <p class="control">
-                <slider type="success" size="large" :value="longBrakeTime" :max="45" :min="15" :step="5" @change="updateLong" class="input"></slider>
+                <slider type="success" size="large" :value="form.longBrakeTime" :max="45" :min="15" :step="5" @change="updateLong" class="input"></slider>
               </p>
             </div>
           </div>
@@ -45,27 +45,38 @@
 
 <script>
 import Slider from 'vue-bulma-slider/src/Slider'
+import { mapState } from 'vuex'
 
 export default {
   data () {
     return {
-      cycleTime: 25,
-      shortBrakeTime: 5,
-      longBrakeTime: 20
+      form: {
+        cycleTime: 25,
+        shortBrakeTime: 5,
+        longBrakeTime: 20
+      }
     }
+  },
+
+  computed: {
+    ...mapState({
+      cycleTime: state => state.settings.cycleTime,
+      longBrakeTime: state => state.settings.longBrakeTime,
+      shortBrakeTime: state => state.settings.shortBrakeTime
+    })
   },
 
   methods: {
     updateCycle (val) {
-      this.cycleTime = Number(val)
+      this.$store.dispatch('updateCycle', val)
     },
 
     updateShort (val) {
-      this.shortBrakeTime = Number(val)
+      this.$store.dispatch('updateShort', val)
     },
 
     updateLong (val) {
-      this.longBrakeTime = Number(val)
+      this.$store.dispatch('updateLong', val)
     }
   },
 
