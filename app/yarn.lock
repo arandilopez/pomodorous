@@ -10,6 +10,10 @@ font-awesome@^4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/font-awesome/-/font-awesome-4.7.0.tgz#8fa8cf0411a1a31afd07b06d2902bb9fc815a133"
 
+vue-bulma-slider@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/vue-bulma-slider/-/vue-bulma-slider-1.0.2.tgz#7b8e0dd0bc2c1a7c5e77d117059847ba41eaff14"
+
 vue-electron@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/vue-electron/-/vue-electron-1.0.6.tgz#e798e03180b8933539defe31f92e53b9242b9406"
