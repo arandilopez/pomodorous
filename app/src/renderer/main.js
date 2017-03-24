@@ -9,6 +9,13 @@ Vue.use(Electron)
 Vue.use(Router)
 Vue.config.debug = true
 
+Vue.filter('two_digits', function (value) {
+  if (value.toString().length <= 1) {
+    return '0' + value.toString()
+  }
+  return value.toString()
+})
+
 const router = new Router({
   scrollBehavior: () => ({ y: 0 }),
   routes
