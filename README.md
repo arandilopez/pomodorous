@@ -2,6 +2,8 @@
 
 > Pomodore time tracker
 
+![ScreenShot](screenshots/ScreenShot.png)
+
 Pomodorous is build on Electron + Vue
 
 ## Build Setup
