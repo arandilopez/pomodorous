@@ -9,7 +9,11 @@
         :stop-color="stopColor"
         :inner-stroke-color="innerStrokeColor"
         :strokeWidth="strokeWidth">
-          <h1 class="title is-1">25:00</h1>
+          <clock
+            :total-secs="totalSteps"
+            :playing="playing"
+            @tictac="incrementSteps">
+          </clock>
         </radial-progress-bar>
       </div>
     </div>
@@ -35,36 +39,53 @@
 
 <script>
 import RadialProgressBar from 'vue-radial-progress/src/RadialProgressBar'
+import {mapState} from 'vuex'
+import Clock from './Clock'
 
 export default {
   data () {
     return {
-      completedSteps: 1400,
-      totalSteps: 1500,
+      completedSteps: 0,
       startColor: '#72d0eb',
       stopColor: '#00a1cf',
       innerStrokeColor: '#eee',
       strokeWidth: 7,
       playing: false,
-
       focusItem: 'Work work work!'
     }
   },
 
   computed: {
+    ...mapState({
+      cycleTime: state => state.settings.cycleTime
+    }),
+
     playOrPauseIcon () {
       return (this.playing) ? 'fa fa-pause' : 'fa fa-play'
+    },
+
+    totalSteps () {
+      return this.cycleTime * 60 // converts mins to segs
     }
   },
 
   methods: {
     playOrPause () {
       this.playing = !this.playing
+    },
+
+    incrementSteps () {
+      this.completedSteps += 1
+    },
+
+    stop () {
+      this.completedSteps = 0
     }
   },
 
   components: {
-    RadialProgressBar
+    RadialProgressBar,
+    Clock
   }
 }
 </script>
