@@ -4,7 +4,7 @@
 
 ![ScreenShot](screenshots/ScreenShot.png)
 
-Pomodorous is build on [Electron](https://electron.atom.io/) + [Vue](https://vuejs.org) + [Bulma](https://bulma.io)
+Pomodorous is build on [Electron](https://electron.atom.io/) + [Vue](https://vuejs.org) + [Bulma](http://bulma.io)
 
 ## Build Setup
 
