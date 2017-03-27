@@ -22,8 +22,6 @@ $fa-font-path: "~font-awesome/fonts";
 
 $family-serif: "Lato", serif; // Add a serif family
 $family-primary: $family-serif; // Use the new serif family
-$blue: #72d0eb;// Update blue
-$pink: #ffb3b3; // Add pink
 
 @import "~bulma";
 

@@ -37,6 +37,10 @@ export default {
         this.$emit('ended')
       }
     }, 1000)
+
+    this.$on('restart', () => {
+      console.log('Clock listen for restart!!!')
+    })
   }
 }
 </script>

@@ -29,7 +29,10 @@
         <button type="button" class="button is-primary" @click="playOrPause">
           <i :class="playOrPauseIcon"></i>
         </button>
-        <button type="button" class="button is-danger">
+        <button type="button" class="button is-info">
+          <i class="fa fa-undo"></i>
+        </button>
+        <button type="button" class="button is-danger" @click="stop">
           <i class="fa fa-stop"></i>
         </button>
       </div>
@@ -80,6 +83,7 @@ export default {
 
     stop () {
       this.completedSteps = 0
+      this.$emit('restart')
     }
   },
 
