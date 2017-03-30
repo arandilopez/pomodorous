@@ -8,12 +8,13 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+const clockSound = require('./Timer/clock_tic.wav')
 
 export default {
   props: [],
   data () {
     return {
-      time: 0
+      clockSound: new Audio(clockSound)
     }
   },
 
@@ -42,11 +43,15 @@ export default {
   },
 
   created () {
+    this.clockSound.volume = 0.1
+
     setInterval(() => {
       if (this.isPlaying && this.currentTime > 0) {
         this.decreaseCurrentTime()
+        this.clockSound.play()
         this.$emit('tictac')
       } else if (this.currentTime <= 0) {
+        this.clockSound.stop()
         this.$emit('ended')
       }
     }, 1000)

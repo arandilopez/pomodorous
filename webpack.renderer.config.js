@@ -67,6 +67,16 @@ let rendererConfig = {
         }
       },
       {
+        test: /\.(mp3|wav)(\?.*)?$/,
+        use: {
+          loader: 'url-loader',
+          query: {
+            limit: 10000,
+            name: 'sounds/[name].[ext]'
+          }
+        }
+      },
+      {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         use: {
           loader: 'url-loader',

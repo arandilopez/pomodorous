@@ -10,7 +10,8 @@
         :inner-stroke-color="innerStrokeColor"
         :strokeWidth="strokeWidth">
           <clock
-            @tictac="incrementSteps">
+            @tictac="incrementSteps"
+            @ended="endedCycle">
           </clock>
         </radial-progress-bar>
       </div>
@@ -42,6 +43,8 @@
 import RadialProgressBar from 'vue-radial-progress/src/RadialProgressBar'
 import {mapState, mapActions} from 'vuex'
 import Clock from './Clock'
+const longBrakeSound = require('./Timer/long_brake_bell.mp3')
+const shortBrakeSound = require('./Timer/short_brake_bell.wav')
 
 export default {
   data () {
@@ -50,7 +53,9 @@ export default {
       stopColor: '#00a1cf',
       innerStrokeColor: '#eee',
       strokeWidth: 7,
-      focusItem: 'Work work work!'
+      focusItem: 'Work work work!',
+      longBrakeSound: new Audio(longBrakeSound),
+      shortBrakeSound: new Audio(shortBrakeSound)
     }
   },
 
@@ -79,7 +84,11 @@ export default {
       'incrementSteps',
       'setTotalSteps',
       'setCurrentTime'
-    ])
+    ]),
+
+    endedCycle () {
+
+    }
   },
 
   created () {
