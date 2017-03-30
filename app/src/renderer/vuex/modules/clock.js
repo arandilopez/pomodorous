@@ -17,12 +17,12 @@ const mutations = {
   },
 
   [types.CLOCK_RESTART] (state) {
-    state.currentTime = 0
+    state.currentTime = Number(state.totalSteps)
   },
 
   [types.CLOCK_STOP] (state) {
     state.isPlaying = false
-    state.currentTime = 0
+    state.currentTime = Number(state.totalSteps)
   },
 
   [types.CLOCK_SET_TIME] (state, time) {
@@ -56,11 +56,13 @@ const actions = {
   },
 
   restart ({state, commit}) {
-
+    commit(types.CLOCK_RESTART)
+    commit(types.CLOCK_SET_CURRENT_STEPS, 0)
   },
 
   stop ({state, commit}) {
-
+    commit(types.CLOCK_STOP)
+    commit(types.CLOCK_SET_CURRENT_STEPS, 0)
   },
 
   setCurrentTime ({state, commit}, time) {

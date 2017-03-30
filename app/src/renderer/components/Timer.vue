@@ -27,7 +27,7 @@
         <button type="button" class="button is-primary" @click="playOrPause">
           <i :class="playOrPauseIcon"></i>
         </button>
-        <button type="button" class="button is-info">
+        <button type="button" class="button is-info" @click="restart">
           <i class="fa fa-undo"></i>
         </button>
         <button type="button" class="button is-danger" @click="stop">
@@ -73,15 +73,13 @@ export default {
   methods: {
     ...mapActions([
       'playOrPause',
+      'restart',
+      'stop',
+
       'incrementSteps',
       'setTotalSteps',
       'setCurrentTime'
-    ]),
-
-    stop () {
-      this.completedSteps = 0
-      this.$emit('restart')
-    }
+    ])
   },
 
   created () {
