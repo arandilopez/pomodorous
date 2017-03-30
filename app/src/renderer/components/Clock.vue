@@ -1,15 +1,16 @@
 <template lang="html">
   <div>
     <h1 class="title is-1">
-      {{mins | two_digits}} : {{segs | two_digits}}
+      {{mins | two_digits}}:{{segs | two_digits}}
     </h1>
   </div>
 </template>
 
 <script>
-export default {
-  props: ['totalSecs', 'playing'],
+import { mapState, mapActions } from 'vuex'
 
+export default {
+  props: [],
   data () {
     return {
       time: 0
@@ -17,30 +18,38 @@ export default {
   },
 
   computed: {
+    ...mapState({
+      totalSteps: state => state.clock.totalSteps,
+      currentSteps: state => state.clock.currentSteps,
+      currentTime: state => state.clock.currentTime,
+      isPlaying: state => state.clock.isPlaying
+    }),
+
     mins () {
-      return (this.time / 60) % 60 | 0
+      return parseInt((this.currentTime / 60) % 60, 10)
     },
 
     segs () {
-      return this.time % 60 | 0
+      return parseInt(this.currentTime % 60, 10)
     }
   },
 
-  created () {
-    this.time = Number(this.totalSecs)
+  methods: {
+    ...mapActions([
+      'setCurrentTime',
+      'decreaseCurrentTime'
+    ])
+  },
 
+  created () {
     setInterval(() => {
-      if (this.playing && this.time > 0) {
-        this.time -= 1
+      if (this.isPlaying && this.currentTime > 0) {
+        this.decreaseCurrentTime()
         this.$emit('tictac')
-      } else if (this.time <= 0) {
+      } else if (this.currentTime <= 0) {
         this.$emit('ended')
       }
     }, 1000)
-
-    this.$on('restart', () => {
-      console.log('Clock listen for restart!!!')
-    })
   }
 }
 </script>

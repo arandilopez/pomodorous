@@ -23,16 +23,36 @@ const mutations = {
   [types.CLOCK_STOP] (state) {
     state.isPlaying = false
     state.currentTime = 0
+  },
+
+  [types.CLOCK_SET_TIME] (state, time) {
+    state.currentTime = time
+  },
+
+  [types.CLOCK_DECREASE_CURRENT_TIME] (state) {
+    state.currentTime--
+  },
+
+  [types.CLOCK_SET_CURRENT_STEPS] (state, steps) {
+    state.currentSteps = steps
+  },
+
+  [types.CLOCK_INCREMENT_CURRENT_STEPS] (state) {
+    state.currentSteps++
+  },
+
+  [types.CLOCK_SET_TOTAL_STEPS] (state, steps) {
+    state.totalSteps = steps
   }
 }
 
 const actions = {
-  play ({state, commit}) {
-
-  },
-
-  pause ({state, commit}) {
-
+  playOrPause ({state, commit}) {
+    if (state.isPlaying) {
+      commit(types.CLOCK_PAUSE)
+    } else {
+      commit(types.CLOCK_PLAY)
+    }
   },
 
   restart ({state, commit}) {
@@ -43,7 +63,22 @@ const actions = {
 
   },
 
-  run ({ state }) {
+  setCurrentTime ({state, commit}, time) {
+    if (state.currentTime <= 0) {
+      commit(types.CLOCK_SET_TIME, time)
+    }
+  },
+
+  decreaseCurrentTime ({commit}) {
+    commit(types.CLOCK_DECREASE_CURRENT_TIME)
+  },
+
+  incrementSteps ({commit}) {
+    commit(types.CLOCK_INCREMENT_CURRENT_STEPS)
+  },
+
+  setTotalSteps ({commit}, steps) {
+    commit(types.CLOCK_SET_TOTAL_STEPS, steps)
   }
 }
 

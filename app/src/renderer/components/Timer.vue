@@ -3,15 +3,13 @@
     <div class="columns">
       <div class="column">
         <radial-progress-bar :diameter="300"
-        :completed-steps="completedSteps"
+        :completed-steps="currentSteps"
         :total-steps="totalSteps"
         :start-color="startColor"
         :stop-color="stopColor"
         :inner-stroke-color="innerStrokeColor"
         :strokeWidth="strokeWidth">
           <clock
-            :total-secs="totalSteps"
-            :playing="playing"
             @tictac="incrementSteps">
           </clock>
         </radial-progress-bar>
@@ -42,49 +40,53 @@
 
 <script>
 import RadialProgressBar from 'vue-radial-progress/src/RadialProgressBar'
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 import Clock from './Clock'
 
 export default {
   data () {
     return {
-      completedSteps: 0,
       startColor: '#72d0eb',
       stopColor: '#00a1cf',
       innerStrokeColor: '#eee',
       strokeWidth: 7,
-      playing: false,
       focusItem: 'Work work work!'
     }
   },
 
   computed: {
     ...mapState({
-      cycleTime: state => state.settings.cycleTime
+      cycleTime: state => state.settings.cycleTime,
+      longBrakeTime: state => state.settings.longBrakeTime,
+      shortBrakeTime: state => state.settings.shortBrakeTime,
+
+      isPlaying: state => state.clock.isPlaying,
+      currentSteps: state => state.clock.currentSteps,
+      totalSteps: state => state.clock.totalSteps
     }),
 
     playOrPauseIcon () {
-      return (this.playing) ? 'fa fa-pause' : 'fa fa-play'
-    },
-
-    totalSteps () {
-      return this.cycleTime * 60 // converts mins to segs
+      return (this.isPlaying) ? 'fa fa-pause' : 'fa fa-play'
     }
   },
 
   methods: {
-    playOrPause () {
-      this.playing = !this.playing
-    },
-
-    incrementSteps () {
-      this.completedSteps += 1
-    },
+    ...mapActions([
+      'playOrPause',
+      'incrementSteps',
+      'setTotalSteps',
+      'setCurrentTime'
+    ]),
 
     stop () {
       this.completedSteps = 0
       this.$emit('restart')
     }
+  },
+
+  created () {
+    this.setTotalSteps(this.cycleTime * 60)
+    this.setCurrentTime(Number(this.totalSteps))
   },
 
   components: {
