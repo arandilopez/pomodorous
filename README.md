@@ -2,7 +2,7 @@
 
 > Pomodore time tracker
 
-![ScreenShot](screenshots/ScreenShot.png)
+![ScreenShot](screenshots/ScreenShot.png?2)
 
 Pomodorous is build on [Electron](https://electron.atom.io/) + [Vue](https://vuejs.org) + [Bulma](http://bulma.io)
 
