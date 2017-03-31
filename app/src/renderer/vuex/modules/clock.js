@@ -4,7 +4,8 @@ const state = {
   totalSteps: 0,
   currentSteps: 0,
   currentTime: 0,
-  isPlaying: false
+  isPlaying: false,
+  intervalId: 0
 }
 
 const mutations = {
@@ -43,6 +44,10 @@ const mutations = {
 
   [types.CLOCK_SET_TOTAL_STEPS] (state, steps) {
     state.totalSteps = steps
+  },
+
+  [types.CLOCK_SET_INTERVAL_ID] (state, id) {
+    state.intervalId = id
   }
 }
 
@@ -81,10 +86,15 @@ const actions = {
 
   setTotalSteps ({commit}, steps) {
     commit(types.CLOCK_SET_TOTAL_STEPS, steps)
+  },
+
+  setIntervalId ({commit}, id) {
+    commit(types.CLOCK_SET_INTERVAL_ID, id)
   }
 }
 
 export default {
+  // namespaced: true,
   state,
   mutations,
   actions

@@ -41,8 +41,10 @@
 
 <script>
 import RadialProgressBar from 'vue-radial-progress/src/RadialProgressBar'
-import {mapState, mapActions} from 'vuex'
+import {mapState, mapActions, mapGetters} from 'vuex'
 import Clock from './Clock'
+import * as pomodoros from '../vuex/pomodoro-types'
+
 const longBrakeSound = require('./Timer/long_brake_bell.mp3')
 const shortBrakeSound = require('./Timer/short_brake_bell.wav')
 
@@ -54,6 +56,7 @@ export default {
       innerStrokeColor: '#eee',
       strokeWidth: 7,
       focusItem: 'Work work work!',
+
       longBrakeSound: new Audio(longBrakeSound),
       shortBrakeSound: new Audio(shortBrakeSound)
     }
@@ -70,6 +73,13 @@ export default {
       totalSteps: state => state.clock.totalSteps
     }),
 
+    ...mapGetters({
+      isPomodoro: 'isPomodoro',
+      isLongBrake: 'isLongBrake',
+      isShortBrake: 'isShortBrake',
+      nextCycle: 'nextCycle'
+    }),
+
     playOrPauseIcon () {
       return (this.isPlaying) ? 'fa fa-pause' : 'fa fa-play'
     }
@@ -83,15 +93,58 @@ export default {
 
       'incrementSteps',
       'setTotalSteps',
-      'setCurrentTime'
+      'setCurrentTime',
+
+      'pomodoroCycle',
+      'shortCycle',
+      'longCycle',
+      'incrementPomodorosCount',
+      'incrementShortBrakesCount',
+      'incrementCyclesCount'
     ]),
 
     endedCycle () {
+      this.stop()
+      if (this.nextCycle === pomodoros.POMODORO) {
+        if (this.isLongBrake) {
+          this.initPomodoroCycle()
+          this.incrementCyclesCount()
+        } else {
+          this.initPomodoroCycle()
+          this.incrementPomodorosCount()
+        }
+      } else if (this.nextCycle === pomodoros.SHORT_BRAKE) {
+        this.shortBrakeSound.play()
+        this.initShortCycle()
+        this.incrementShortBrakesCount()
+      } else if (this.nextCycle === pomodoros.LONG_BRAKE) {
+        this.longBrakeSound.play()
+        this.initLongBrake()
+      }
+    },
 
+    initPomodoroCycle () {
+      this.pomodoroCycle()
+      this.setTotalSteps(this.cycleTime * 60)
+      this.setCurrentTime(Number(this.totalSteps))
+    },
+
+    initShortCycle () {
+      this.shortCycle()
+      this.setTotalSteps(this.shortBrakeTime * 60)
+      this.setCurrentTime(Number(this.totalSteps))
+    },
+
+    initLongBrake () {
+      this.longCycle()
+      this.setTotalSteps(this.longBrakeTime * 60)
+      this.setCurrentTime(Number(this.totalSteps))
     }
   },
 
   created () {
+    this.longBrakeSound.volume = 0.1
+    this.shortBrakeSound.volume = 0.1
     this.setTotalSteps(this.cycleTime * 60)
     this.setCurrentTime(Number(this.totalSteps))
   },

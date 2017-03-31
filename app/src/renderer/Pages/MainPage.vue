@@ -8,10 +8,22 @@
 
 <script>
 import Timer from '../components/Timer'
+import { mapState } from 'vuex'
 
 export default {
   components: {
     Timer
+  },
+
+  computed: {
+    ...mapState({
+      intervalId: state => state.clock.intervalId
+    })
+  },
+
+  beforeRouteLeave (to, prev, next) {
+    clearInterval(this.intervalId)
+    next()
   },
   name: 'main-page'
 }

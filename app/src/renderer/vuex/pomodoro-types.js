@@ -1,3 +1,3 @@
-export const POMODORO = 'pomodoro'
-export const SHORT_BRAKE = 'pomodoro'
-export const LONG_BRAKE = 'pomodoro'
+export const POMODORO = 'POMODORO'
+export const SHORT_BRAKE = 'SHORT_BRAKE'
+export const LONG_BRAKE = 'LONG_BRAKE'
